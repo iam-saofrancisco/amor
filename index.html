@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Para Lariça ❤️</title>
+<meta name="description" content="Um cantinho feito de amor, só pra você, Lariça.">
+<meta name="theme-color" content="#2a0a18">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❤️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+/* ═══ BASE ═══ */
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{min-height:100vh;font-family:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#ffe9ef;background:radial-gradient(1200px 700px at 80% -10%,rgba(198,106,134,.35),transparent 60%),radial-gradient(900px 600px at 10% 110%,rgba(246,210,122,.12),transparent 60%),linear-gradient(160deg,#20060f 0%,#3d0e20 48%,#5c1730 100%);background-attachment:fixed;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+p{font-weight:300}
+
+/* ═══ CORAÇÕES DE FUNDO ═══ */
+#heartsBg{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.heart-float{position:absolute;bottom:-8vh;animation:floatUp linear infinite;user-select:none}
+@keyframes floatUp{0%{transform:translateY(0) translateX(0) rotate(-10deg);opacity:0}8%{opacity:.55}45%{transform:translateY(-52vh) translateX(26px) rotate(10deg)}100%{transform:translateY(-112vh) translateX(-18px) rotate(-8deg);opacity:0}}
+
+/* ═══ CHUVA DE CORAÇÕES ═══ */
+#burstLayer{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:60}
+.heart-fall{position:absolute;top:-7vh;animation:heartFall ease-in forwards;user-select:none}
+@keyframes heartFall{0%{opacity:1;transform:translateY(0) rotate(0)}100%{opacity:0;transform:translateY(114vh) rotate(300deg)}}
+
+/* ═══ CARTÃO ═══ */
+#lockScreen{position:relative;z-index:2;min-height:100vh;min-height:100svh;display:flex;align-items:center;justify-content:center;padding:28px 18px}
+.card{position:relative;width:100%;max-width:440px;text-align:center;background:linear-gradient(165deg,rgba(255,240,245,.10),rgba(255,240,245,.035));border:1px solid rgba(255,205,220,.22);border-radius:28px;padding:46px 26px 36px;box-shadow:0 26px 70px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.14);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);animation:cardIn .9s ease .15s both}
+@keyframes cardIn{from{opacity:0;transform:translateY(26px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes cardOpen{to{opacity:0;transform:translateY(-30px) scale(1.12);filter:blur(8px)}}
+@keyframes shake{10%,90%{transform:translateX(-6px)}20%,80%{transform:translateX(8px)}30%,50%,70%{transform:translateX(-10px)}40%,60%{transform:translateX(10px)}}
+.card.shake{animation:shake .5s ease}
+/* ═══ CADEADO DOURADO ═══ */
+.padlock{position:relative;width:64px;height:50px;margin:44px auto 20px}
+.padlock .shackle{position:absolute;top:-31px;left:50%;width:40px;height:34px;margin-left:-20px;border:7px solid #e9b949;border-bottom:none;border-radius:22px 22px 0 0;transform-origin:100% 100%;transition:transform .7s cubic-bezier(.68,-.4,.3,1.35)}
+.card.unlocked .padlock .shackle{transform:rotate(-45deg)}
+.padlock .body{position:absolute;inset:0;border-radius:11px;background:linear-gradient(150deg,#f8dd90,#e0a83e 55%,#c9822f);box-shadow:inset 0 2px 6px rgba(255,255,255,.55),0 10px 26px rgba(0,0,0,.4);transition:box-shadow .5s}
+.card.unlocked .padlock .body{box-shadow:0 0 32px rgba(246,210,122,.8),inset 0 2px 6px rgba(255,255,255,.55)}
+.padlock .body::before{content:"";position:absolute;left:50%;top:50%;width:12px;height:12px;margin:-13px 0 0 -6px;border-radius:50%;background:#6d4310;box-shadow:inset 0 1px 2px rgba(0,0,0,.5)}
+.padlock .body::after{content:"";position:absolute;left:50%;top:50%;width:6px;height:15px;margin:-1px 0 0 -3px;border-radius:0 0 4px 4px;background:#6d4310}
+.sparkle{position:absolute;z-index:6;pointer-events:none;animation:sparkleAnim 1.15s ease forwards;text-shadow:0 0 10px rgba(246,210,122,.95)}
+@keyframes sparkleAnim{0%{opacity:0;transform:translate(0,0) scale(.4)}45%{opacity:1;transform:translate(var(--dx,8px),-16px) scale(1.15)}100%{opacity:0;transform:translate(calc(var(--dx,8px)*1.7),-34px) scale(.5)}}
+
+/* ═══ TEXTOS E CAIXINHAS DA SENHA ═══ */
+.names{font-family:'Dancing Script','Segoe Script',cursive;font-size:clamp(2.2rem,8vw,2.9rem);font-weight:700;color:#ffd9e2;text-shadow:0 4px 26px rgba(255,120,160,.35);line-height:1.15}
+.names .h{display:inline-block;font-size:.8em;animation:heartBeat 1.6s ease-in-out infinite}
+@keyframes heartBeat{0%,100%{transform:scale(1)}25%{transform:scale(1.18)}40%{transform:scale(.95)}60%{transform:scale(1.12)}}
+.question{margin-top:10px;font-size:.98rem;color:rgba(255,229,237,.85)}
+.boxes{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:20px 0 6px}
+.boxes input{width:52px;height:62px;border-radius:14px;border:2px solid rgba(255,210,222,.35);background:rgba(255,255,255,.08);color:#fff;font-family:'Dancing Script',cursive;font-size:2rem;font-weight:700;text-align:center;text-transform:uppercase;caret-color:#f6d27a;outline:none;transition:border-color .2s,box-shadow .2s,background .2s,color .3s}
+.boxes input:focus{border-color:#f6d27a;box-shadow:0 0 0 4px rgba(246,210,122,.15);background:rgba(255,255,255,.12)}
+.card.unlocked .boxes input{border-color:rgba(246,210,122,.65);color:#f6d27a;background:rgba(246,210,122,.08)}
+@media(max-width:380px){.boxes input{width:44px;height:54px;font-size:1.7rem}}
+#statusMsg{min-height:1.5em;font-size:.95rem;color:#ffb3c1}
+#statusMsg.ok{color:#f6d27a;font-size:1.06rem;font-weight:500}
+#hintMsg{min-height:1.4em;font-size:.85rem;color:#f0c25a;opacity:0;transition:opacity .5s}
+#hintMsg.show{opacity:1}
+/* ═══ BOTÃO "ABRA" ═══ */
+#btnOpen{margin-top:16px;padding:15px 58px;border:none;border-radius:999px;cursor:pointer;font-family:'Dancing Script',cursive;font-size:2rem;font-weight:700;color:#43101f;background:linear-gradient(135deg,#f8dd90,#e0a83e 55%,#c9822f);box-shadow:0 10px 30px rgba(224,168,62,.35),inset 0 1px 0 rgba(255,255,255,.6);opacity:0;transform:scale(.8);pointer-events:none;transition:opacity .5s,transform .5s}
+#btnOpen.ready{opacity:1;transform:scale(1);pointer-events:auto;animation:pulseGlow 2.2s ease-in-out infinite}
+#btnOpen:hover{transform:scale(1.06)}
+#btnOpen:active{transform:scale(.97)}
+@keyframes pulseGlow{0%,100%{box-shadow:0 10px 30px rgba(224,168,62,.35),0 0 0 0 rgba(246,210,122,.45)}50%{box-shadow:0 10px 34px rgba(224,168,62,.5),0 0 0 16px rgba(246,210,122,0)}}
+
+/* ═══ CONTEÚDO PRINCIPAL ═══ */
+main{display:none;position:relative;z-index:1}
+main.show{display:block;animation:contentIn .9s ease both}
+@keyframes contentIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.hero{text-align:center;padding:58px 20px 10px}
+.hero h1{font-family:'Dancing Script',cursive;font-size:clamp(2.8rem,11vw,4.4rem);font-weight:700;color:#ffd9e2;text-shadow:0 4px 30px rgba(255,120,160,.35);line-height:1.1}
+.hero .sub{margin-top:10px;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,225,235,.65)}
+section{padding:26px 20px;max-width:760px;margin:0 auto}
+h2{font-family:'Dancing Script',cursive;font-size:clamp(1.9rem,7vw,2.6rem);font-weight:600;color:#ffd9e2;text-align:center;margin-bottom:24px}
+h2::after{content:"";display:block;width:70px;height:2px;margin:12px auto 0;border-radius:2px;background:linear-gradient(90deg,transparent,#f6d27a,transparent)}
+.letter-card{background:linear-gradient(165deg,rgba(255,240,245,.09),rgba(255,240,245,.03));border:1px solid rgba(255,205,220,.22);border-radius:26px;padding:30px 26px;box-shadow:0 24px 60px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.12);cursor:pointer;min-height:180px;transition:border-color .3s}
+.letter-card:hover{border-color:rgba(255,205,220,.4)}
+.letter-card p{margin-bottom:18px;line-height:1.85;font-size:1.02rem;color:#ffeef3}
+.letter-card p:last-child{margin-bottom:0}
+.letter-card .lead{font-family:'Dancing Script',cursive;font-size:2rem;font-weight:600;color:#ffd9e2;line-height:1.3}
+.letter-card .sig1{font-style:italic;color:rgba(255,238,243,.9);margin-top:26px}
+.letter-card .sig2{font-family:'Dancing Script',cursive;font-size:1.7rem;color:#f6d27a;font-weight:600}
+.letter-card p.typing::after{content:"❘";margin-left:2px;color:#f6d27a;animation:blink .8s step-start infinite}
+@keyframes blink{50%{opacity:0}}
+.letter-hint{text-align:center;font-size:.75rem;letter-spacing:.06em;color:rgba(255,225,235,.45);margin-top:12px}
+/* ═══ FRASE DESTAQUE ═══ */
+.quote-wrap{text-align:center;padding:44px 26px}
+.quote{font-family:'Dancing Script',cursive;font-size:clamp(2rem,7.5vw,3rem);font-weight:600;line-height:1.45;color:#f6d27a;text-shadow:0 0 34px rgba(246,210,122,.3)}
+.quote .q{color:rgba(246,210,122,.55)}
+.quote-heart{margin-top:14px;font-size:1.1rem;opacity:.85}
+
+/* ═══ CONTADOR ═══ */
+.counter{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.count-box{background:linear-gradient(170deg,rgba(255,240,245,.10),rgba(255,240,245,.03));border:1px solid rgba(255,205,220,.2);border-radius:18px;padding:16px 6px;text-align:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}
+.count-box .num{font-size:clamp(1.5rem,6.5vw,2.1rem);font-weight:600;color:#fff;font-variant-numeric:tabular-nums;line-height:1.1}
+.count-box .lbl{margin-top:6px;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,225,235,.6)}
+.since{text-align:center;margin-top:16px;font-size:.85rem;color:rgba(255,225,235,.7)}
+
+/* ═══ MOTIVOS ═══ */
+.motives{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:600px){.motives{grid-template-columns:1fr 1fr}}
+.motive{display:flex;gap:14px;align-items:flex-start;background:linear-gradient(165deg,rgba(255,240,245,.09),rgba(255,240,245,.03));border:1px solid rgba(255,205,220,.2);border-radius:20px;padding:18px;box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}
+.motive .ico{flex:0 0 auto;width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.35rem;background:radial-gradient(circle at 30% 25%,rgba(246,210,122,.35),rgba(246,210,122,.08));border:1px solid rgba(246,210,122,.35)}
+.motive h3{font-size:.98rem;font-weight:600;color:#fff;margin-bottom:4px}
+.motive p{font-size:.86rem;color:rgba(255,238,243,.8);line-height:1.55}
+/* ═══ LINHA DO TEMPO ═══ */
+.timeline{position:relative;margin-left:8px;padding-left:26px;border-left:2px solid rgba(246,210,122,.35)}
+.t-item{position:relative;padding-bottom:26px}
+.t-item:last-child{padding-bottom:0}
+.t-item::before{content:"";position:absolute;left:-34px;top:6px;width:13px;height:13px;border-radius:50%;background:#f6d27a;box-shadow:0 0 14px rgba(246,210,122,.8)}
+.t-item .t-date{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#f6d27a;font-weight:500}
+.t-item h3{margin:6px 0 4px;font-size:1.02rem;font-weight:600;color:#fff}
+.t-item p{font-size:.88rem;color:rgba(255,238,243,.78);line-height:1.6}
+
+/* ═══ SURPRESA ═══ */
+.surprise-wrap{text-align:center}
+.btn-surprise{padding:15px 34px;border-radius:999px;border:1px solid rgba(246,210,122,.55);background:linear-gradient(165deg,rgba(246,210,122,.16),rgba(246,210,122,.05));color:#f6d27a;font-family:'Poppins',sans-serif;font-size:.95rem;font-weight:500;letter-spacing:.04em;cursor:pointer;transition:transform .25s,box-shadow .25s,background .25s}
+.btn-surprise:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(246,210,122,.25);background:linear-gradient(165deg,rgba(246,210,122,.26),rgba(246,210,122,.08))}
+.btn-surprise:active{transform:scale(.97)}
+.surprise-box{min-height:96px;margin-top:22px;display:flex;align-items:center;justify-content:center;padding:18px;border-radius:22px;border:1px dashed rgba(255,205,220,.3);background:rgba(255,240,245,.04)}
+#surpriseMsg{font-family:'Dancing Script',cursive;font-size:clamp(1.5rem,6vw,2rem);font-weight:600;color:#ffe9ef;line-height:1.5}
+#surpriseMsg.pop{animation:popIn .55s cubic-bezier(.2,1.4,.4,1)}
+@keyframes popIn{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:scale(1)}}
+
+/* ═══ FINAL ═══ */
+.final{text-align:center;padding-top:44px}
+.final p{line-height:1.8;color:rgba(255,238,243,.88);max-width:560px;margin:0 auto 14px}
+.final .big{font-family:'Dancing Script',cursive;font-size:clamp(1.7rem,6.5vw,2.3rem);font-weight:600;color:#ffd9e2}
+.final .sign{font-family:'Dancing Script',cursive;font-size:1.6rem;color:#f6d27a;font-weight:600;margin-top:22px}
+.btn-top{margin-top:34px;padding:12px 26px;border-radius:999px;border:1px solid rgba(255,205,220,.35);background:transparent;color:rgba(255,238,243,.85);font-family:'Poppins',sans-serif;font-size:.85rem;cursor:pointer;transition:background .25s,transform .25s}
+.btn-top:hover{background:rgba(255,240,245,.08);transform:translateY(-2px)}
+footer{text-align:center;padding:46px 20px 60px;font-size:.75rem;letter-spacing:.08em;color:rgba(255,225,235,.45)}
+
+/* ═══ BOTÃO DE MÚSICA ═══ */
+#musicBtn{position:fixed;right:16px;bottom:16px;z-index:80;width:48px;height:48px;border-radius:50%;border:1px solid rgba(246,210,122,.5);background:linear-gradient(165deg,rgba(60,20,35,.88),rgba(40,10,20,.88));color:#f6d27a;font-size:1.15rem;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 10px 26px rgba(0,0,0,.4);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:transform .25s}
+#musicBtn.show{display:flex;animation:musicIn .6s ease both}
+#musicBtn:hover{transform:scale(1.08)}
+#musicBtn:active{transform:scale(.94)}
+@keyframes musicIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* ═══ ANIMAÇÃO DE ENTRADA (SCROLL) ═══ */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
+.reveal.visible{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.heart-float,.heart-fall{display:none}}
+</style>
+</head>
+<body>
+<div id="heartsBg" aria-hidden="true"></div>
+<div id="burstLayer" aria-hidden="true"></div>
+<button id="musicBtn" type="button" title="Ligar/desligar música" aria-label="Ligar ou desligar música">🎵</button>
+
+<!-- ═══ 1) TELA DO CADEADO ═══ -->
+<section id="lockScreen">
+  <div class="card" id="lockCard">
+    <div class="padlock" id="padlock" aria-hidden="true"><div class="shackle"></div><div class="body"></div></div>
+    <h1 class="names">Para Lariça <span class="h">❤️</span></h1>
+    <p class="question">Qual o nome da nossa filha?</p>
+    <div class="boxes" id="boxes"></div>
+    <p id="statusMsg" role="status" aria-live="polite"></p>
+    <p id="hintMsg"></p>
+    <button id="btnOpen" type="button">Abra</button>
+  </div>
+</section>
+
+<!-- ═══ 2) CONTEÚDO (abre depois da senha + botão Abra) ═══ -->
+<main id="main">
+  <header class="hero">
+    <h1>Para Lariça</h1>
+    <p class="sub">um cantinho feito de amor · por Vitor</p>
+  </header>
+
+  <section id="letterSection" class="reveal">
+    <h2>A nossa carta</h2>
+    <div class="letter-card" id="letterCard" title="Toque para ler tudo de uma vez">
+      <div id="letterText"></div>
+    </div>
+    <p class="letter-hint">toque na carta para ler tudo de uma vez</p>
+  </section>
+
+  <section class="quote-wrap reveal">
+    <p class="quote"><span class="q">“</span>Meu lugar favorito é onde você estiver.<span class="q">”</span></p>
+    <p class="quote-heart">❤️</p>
+  </section>
+
+  <section id="counterSection" class="reveal">
+    <h2>Nosso tempo juntos</h2>
+    <div class="counter">
+      <div class="count-box"><div class="num" id="cntDays">0</div><div class="lbl">dias</div></div>
+      <div class="count-box"><div class="num" id="cntHours">00</div><div class="lbl">horas</div></div>
+      <div class="count-box"><div class="num" id="cntMins">00</div><div class="lbl">minutos</div></div>
+      <div class="count-box"><div class="num" id="cntSecs">00</div><div class="lbl">segundos</div></div>
+    </div>
+    <p class="since">juntos desde 1º de julho de 2026 ❤️</p>
+  </section>
+
+  <section id="motivesSection" class="reveal">
+    <h2>6 motivos por que te amo</h2>
+    <div class="motives" id="motives"></div>
+  </section>
+
+  <section id="timelineSection" class="reveal">
+    <h2>Nossa linha do tempo</h2>
+    <div class="timeline" id="timeline"></div>
+  </section>
+
+  <section id="surpriseSection" class="reveal">
+    <h2>Surpresa pra você</h2>
+    <div class="surprise-wrap">
+      <button class="btn-surprise" id="btnSurprise" type="button">Clique para uma surpresa 💝</button>
+      <div class="surprise-box"><p id="surpriseMsg">Cada clique revela uma mensagem diferente, feita só pra você 💕</p></div>
+    </div>
+  </section>
+
+  <section class="final reveal">
+    <p class="big">Obrigado por ser o meu amor, Lariça.</p>
+    <p>Esse site é pequeno perto do que eu sinto por você, mas foi feito pensando em você — do primeiro ao último detalhe.</p>
+    <p class="sign">Com todo o meu amor,<br>Vitor Guedes Pereira</p>
+    <button class="btn-top" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})">Voltar ao início ↑</button>
+  </section>
+
+  <footer>Feito com ❤️ por Vitor Guedes Pereira · 2026</footer>
+</main>
+<noscript><p style="text-align:center;padding:40px">Ative o JavaScript para ver a surpresa ❤️</p></noscript>
+
+<script>
+// ═══════════════════════════════════════════
+//  ⚙️  CONFIGURAÇÕES — edite aqui se quiser!
+// ═══════════════════════════════════════════
+const CONFIG = {
+  senha: "laura",                     // 🔑 senha do cadeado (aceita maiúscula/minúscula)
+  dataNamoro: "2026-07-01T00:00:00",  // 💘 início do namoro: AAAA-MM-DDTHH:mm:ss
+  musica: ""                          // 🎵 escreva "musica.mp3" para tocar uma música sua; vazio = melodinha do site
+};
+
+// Mensagens quando ela errar a senha
+const MENSAGENS_ERRO = [
+  "Não é essa, amor 😅 Tenta de novo!",
+  "Foquinha... pensa em nós dois 😘",
+  "Quase! Confia no coração e tenta outra vez 💕"
+];
+const MSG_SUCESSO = "Sabia que você ia acertar, amor ❤️";
+
+// 🎁 Mensagens do botão surpresa
+const MENSAGENS_SURPRESA = [
+  "Você é a melhor coisa que já me aconteceu, amor.",
+  "Só vim aqui dizer: eu te amo, Lariça. ❤️",
+  "Meu lugar favorito é onde você estiver. (E o apê no dia 9, claro 😌)",
+  "Se você está lendo isso, é porque alguém está pensando em você bem agora. Adivinha quem?",
+  "Você é o meu “para sempre” favorito.",
+  "Cada dia ao seu lado vale por uma vida inteira.",
+  "Obrigado por existir. E por me deixar te amar. 😄❤️",
+  "Te amo desde o dia 1º e pra todo o sempre."
+];
+
+// ❤️ Os 6 motivos
+const MOTIVOS = [
+  { ico: "😍", t: "Seu sorriso", d: "O meu lugar preferido no mundo." },
+  { ico: "🥰", t: "Quando você me chama de amor", d: "Arrepia até o pensamento." },
+  { ico: "🤗", t: "Seu abraço", d: "Meu porto seguro em qualquer dia." },
+  { ico: "😂", t: "Nossas risadas no apê", d: "Que virou o nosso lugar." },
+  { ico: "💘", t: "Seu jeitinho", d: "Você é dona de tudo e nem sabe." },
+  { ico: "✨", t: "Você, simplesmente você", d: "Não mudaria nada, nem um detalhe." }
+];
+// 📅 Linha do tempo
+const TIMELINE = [
+  { data: "01/07/2026", t: "Nos conhecemos", d: "A vida me apresentou o meu amor." },
+  { data: "09/10/2026", t: "Primeiro encontro, primeiro abraço, primeiro beijo", d: "O dia em que a gente namorou no meu apê e tudo virou verdade." },
+  { data: "Todos os dias", t: "Onde você estiver", d: "Meu lugar favorito nunca foi um lugar." },
+  { data: "Hoje", t: "E ainda é só o começo...", d: "Nossa história continua — com você, sempre." }
+];
+
+// 💌 A carta (cada linha é um parágrafo)
+const PARAGRAFOS = [
+  { t: "Meu amor, Lariça,", c: "lead" },
+  { t: "Tem coisas na vida que a gente não escolhe — simplesmente acontecem. E você aconteceu na minha no dia 1º de julho de 2026. Desde então, nada mais foi igual: tem cor, tem graça, tem um motivo." },
+  { t: "E depois veio o dia 9 de outubro. O dia em que a gente namorou no meu apê — o nosso primeiro encontro, o primeiro abraço, o primeiro beijo. Eu lembro de tudo: do coração acelerado, do medo de estar sonhando, e da certeza que veio depois — é ela. É você. Sempre foi." },
+  { t: "Foi ali que eu entendi a coisa mais importante de todas, e agora eu repito pra quem quiser ouvir: o meu lugar favorito nunca foi um lugar — é onde você estiver. O apê só virou o melhor lugar do mundo porque você estava dentro dele. Com você, qualquer canto vira casa; sem você, até o lugar mais bonito fica faltando algo — você." },
+  { t: "Obrigado por cada risada, cada conversa, cada silêncio gostoso, cada “amor” que me manda e muda o meu dia inteiro. Você é o meu pensamento favorito de todas as horas, o meu porto seguro e a minha escolha de todo dia." },
+  { t: "Prometo cuidar de você, te fazer rir todos os dias, estar do seu lado nas vitórias e segurar a sua mão nos dias difíceis. Porque se for com você, eu vou — e vou feliz." },
+  { t: "Com todo o meu amor, pra todo o sempre,", c: "sig1" },
+  { t: "Vitor Guedes Pereira", c: "sig2" }
+];
+// ═══════════════════════════════════════════
+//  UTILIDADES
+// ═══════════════════════════════════════════
+const $ = id => document.getElementById(id);
+function setStatus(msg, ok){ const el = $("statusMsg"); el.textContent = msg; el.classList.toggle("ok", !!ok); }
+
+function rainHearts(count){
+  const layer = $("burstLayer");
+  const emojis = ["❤️","💗","💕","💖","💘","✨"];
+  for(let i = 0; i < count; i++){
+    const h = document.createElement("span");
+    h.className = "heart-fall";
+    h.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    h.style.left = (Math.random() * 100) + "vw";
+    h.style.fontSize = (15 + Math.random() * 20) + "px";
+    h.style.animationDuration = (1 + Math.random() * 1.1) + "s";
+    h.style.animationDelay = (Math.random() * 0.35) + "s";
+    layer.appendChild(h);
+    setTimeout(() => h.remove(), 2800);
+  }
+}
+
+function sparkleBurst(){
+  const card = $("lockCard"), lock = $("padlock");
+  const cr = card.getBoundingClientRect(), lr = lock.getBoundingClientRect();
+  for(let i = 0; i < 10; i++){
+    const s = document.createElement("span");
+    s.className = "sparkle";
+    s.textContent = i % 3 === 0 ? "⭐" : "✨";
+    s.style.left = (lr.left - cr.left + lr.width / 2 + (Math.random() * 170 - 85)) + "px";
+    s.style.top = (lr.top - cr.top + lr.height / 2 + (Math.random() * 110 - 55)) + "px";
+    s.style.fontSize = (11 + Math.random() * 13) + "px";
+    s.style.setProperty("--dx", (Math.random() * 30 - 15) + "px");
+    s.style.animationDelay = (Math.random() * 0.25) + "s";
+    card.appendChild(s);
+    setTimeout(() => s.remove(), 1500);
+  }
+}
+
+function createFloatingHearts(){
+  const cont = $("heartsBg");
+  const emojis = ["💗","💕","💖","💘","🤍","💝"];
+  for(let i = 0; i < 16; i++){
+    const h = document.createElement("span");
+    h.className = "heart-float";
+    h.textContent = emojis[i % emojis.length];
+    h.style.left = (Math.random() * 100) + "vw";
+    h.style.fontSize = (13 + Math.random() * 20) + "px";
+    h.style.animationDuration = (15 + Math.random() * 15) + "s";
+    h.style.animationDelay = (-Math.random() * 25) + "s";
+    cont.appendChild(h);
+  }
+}
+
+// ═══════════════════════════════════════════
+//  CADEADO (SENHA)
+// ═══════════════════════════════════════════
+let boxes = [], attempts = 0, unlocked = false;
+
+function buildBoxes(){
+  const wrap = $("boxes");
+  for(let i = 0; i < CONFIG.senha.length; i++){
+    const inp = document.createElement("input");
+    inp.className = "letter-box";
+    inp.type = "text";
+    inp.maxLength = 1;
+    inp.autocomplete = "off";
+    inp.setAttribute("autocapitalize", "off");
+    inp.setAttribute("autocorrect", "off");
+    inp.setAttribute("enterkeyhint", "go");
+    inp.setAttribute("aria-label", "Letra " + (i + 1) + " da senha");
+    inp.spellcheck = false;
+    wrap.appendChild(inp);
+  }
+  boxes = [...wrap.querySelectorAll("input")];
+  boxes.forEach((box, i) => {
+    box.addEventListener("focus", () => box.select());
+    box.addEventListener("input", () => {
+      box.value = box.value.replace(/[^a-zA-ZÀ-ÿ]/g, "").slice(-1);
+      if(!unlocked) setStatus("", false);
+      if(box.value && i < boxes.length - 1) boxes[i + 1].focus();
+      if(boxes.every(b => b.value)) checkPassword();
+    });
+    box.addEventListener("keydown", e => {
+      if(e.key === "Backspace" && !box.value && i > 0){ boxes[i - 1].focus(); boxes[i - 1].value = ""; e.preventDefault(); }
+      else if(e.key === "Enter"){
+        const firstEmpty = boxes.find(b => !b.value);
+        if(firstEmpty) firstEmpty.focus(); else checkPassword();
+      }
+    });
+    box.addEventListener("paste", e => {
+      e.preventDefault();
+      const txt = (e.clipboardData.getData("text") || "").replace(/[^a-zA-ZÀ-ÿ]/g, "");
+      txt.split("").slice(0, boxes.length).forEach((ch, k) => { boxes[k].value = ch; });
+      if(boxes.every(b => b.value)) checkPassword();
+      else { const fe = boxes.find(b => !b.value); if(fe) fe.focus(); }
+    });
+  });
+}
+
+function checkPassword(){
+  if(unlocked) return;
+  const attempt = boxes.map(b => b.value.toLowerCase()).join("");
+  if(attempt === CONFIG.senha.toLowerCase()) unlock();
+  else wrong();
+}
+
+function wrong(){
+  if(unlocked) return;
+  attempts++;
+  const card = $("lockCard");
+  card.classList.remove("shake"); void card.offsetWidth; card.classList.add("shake");
+  setStatus(MENSAGENS_ERRO[(attempts - 1) % MENSAGENS_ERRO.length], false);
+  if(attempts >= 3) $("hintMsg").classList.add("show");
+  boxes.forEach(b => b.value = "");
+  setTimeout(() => { if(boxes[0]) boxes[0].focus(); }, 480);
+}
+
+function unlock(){
+  if(unlocked) return;
+  unlocked = true;
+  const card = $("lockCard");
+  card.classList.add("unlocked");
+  card.classList.remove("shake");
+  setStatus(MSG_SUCESSO, true);
+  boxes.forEach(b => b.disabled = true);
+  rainHearts(28);
+  sparkleBurst();
+  setTimeout(() => { $("btnOpen").classList.add("ready"); }, 650);
+}
+// ═══════════════════════════════════════════
+//  ABRIR A PÁGINA (botão "Abra")
+// ═══════════════════════════════════════════
+function openSite(){
+  startMusic();
+  const card = $("lockCard");
+  card.style.animation = "cardOpen .85s ease forwards";
+  rainHearts(44);
+  setTimeout(() => {
+    $("lockScreen").style.display = "none";
+    $("main").classList.add("show");
+    window.scrollTo(0, 0);
+    setTimeout(markVisible, 150);
+  }, 720);
+}
+
+// ═══════════════════════════════════════════
+//  MONTAR LISTAS (motivos e linha do tempo)
+// ═══════════════════════════════════════════
+function buildMotives(){
+  const wrap = $("motives");
+  MOTIVOS.forEach((m, i) => {
+    const d = document.createElement("div");
+    d.className = "motive reveal";
+    d.style.transitionDelay = (i * 0.1) + "s";
+    d.innerHTML = '<div class="ico">' + m.ico + '</div><div><h3>' + m.t + '</h3><p>' + m.d + '</p></div>';
+    wrap.appendChild(d);
+  });
+}
+
+function buildTimeline(){
+  const wrap = $("timeline");
+  TIMELINE.forEach((it, i) => {
+    const d = document.createElement("div");
+    d.className = "t-item reveal";
+    d.style.transitionDelay = (i * 0.1) + "s";
+    d.innerHTML = '<div class="t-date">' + it.data + '</div><h3>' + it.t + '</h3><p>' + it.d + '</p>';
+    wrap.appendChild(d);
+  });
+}
+
+// ═══════════════════════════════════════════
+//  ANIMAÇÕES DE ENTRADA (scroll)
+// ═══════════════════════════════════════════
+function setupObservers(){
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => { if(en.isIntersecting){ en.target.classList.add("visible"); io.unobserve(en.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+  const io2 = new IntersectionObserver(entries => {
+    entries.forEach(en => { if(en.isIntersecting){ startTyping(); io2.disconnect(); } });
+  }, { threshold: 0.12 });
+  io2.observe($("letterSection"));
+}
+
+function markVisible(){
+  document.querySelectorAll(".reveal").forEach(el => {
+    const r = el.getBoundingClientRect();
+    if(r.top < innerHeight * 0.92 && r.bottom > 0) el.classList.add("visible");
+  });
+  const r = $("letterSection").getBoundingClientRect();
+  if(r.top < innerHeight * 0.9) startTyping();
+}
+
+// ═══════════════════════════════════════════
+//  CARTA COM EFEITO DE MÁQUINA DE ESCREVER
+// ═══════════════════════════════════════════
+let typingStarted = false, typingDone = false, typeTimer = null;
+
+function startTyping(){
+  if(typingStarted) return;
+  typingStarted = true;
+  if(typingDone) return;
+  const cont = $("letterText");
+  let pi = 0;
+  function typeParagraph(){
+    if(typingDone) return;
+    if(pi >= PARAGRAFOS.length){ typingDone = true; return; }
+    const par = PARAGRAFOS[pi];
+    const p = document.createElement("p");
+    if(par.c) p.className = par.c;
+    p.classList.add("typing");
+    cont.appendChild(p);
+    let ci = 0;
+    function addChar(){
+      if(typingDone) return;
+      if(ci < par.t.length){
+        const ch = par.t[ci];
+        p.textContent += ch; ci++;
+        let delay = 13;
+        if(ch === "," || ch === ";") delay = 110;
+        else if(ch === "." || ch === "!" || ch === "?") delay = 230;
+        else if(ch === "—") delay = 90;
+        typeTimer = setTimeout(addChar, delay);
+      } else {
+        p.classList.remove("typing");
+        pi++;
+        typeTimer = setTimeout(typeParagraph, 340);
+      }
+    }
+    addChar();
+  }
+  typeParagraph();
+}
+
+function skipTyping(){
+  if(typingDone) return;
+  typingDone = true;
+  clearTimeout(typeTimer);
+  const cont = $("letterText");
+  cont.innerHTML = "";
+  PARAGRAFOS.forEach(par => {
+    const p = document.createElement("p");
+    if(par.c) p.className = par.c;
+    p.textContent = par.t;
+    cont.appendChild(p);
+  });
+}
+// ═══════════════════════════════════════════
+//  CONTADOR DE TEMPO JUNTOS
+// ═══════════════════════════════════════════
+function tick(){
+  const start = new Date(CONFIG.dataNamoro);
+  const diff = Math.max(0, new Date() - start);
+  const days = Math.floor(diff / 86400000);
+  const hours = Math.floor(diff / 3600000) % 24;
+  const mins = Math.floor(diff / 60000) % 60;
+  const secs = Math.floor(diff / 1000) % 60;
+  const pad = n => String(n).padStart(2, "0");
+  if($("cntDays")){
+    $("cntDays").textContent = String(days);
+    $("cntHours").textContent = pad(hours);
+    $("cntMins").textContent = pad(mins);
+    $("cntSecs").textContent = pad(secs);
+  }
+}
+
+// ═══════════════════════════════════════════
+//  BOTÃO SURPRESA
+// ═══════════════════════════════════════════
+let surprisePool = [], lastSurprise = null;
+
+function surprise(){
+  if(!surprisePool.length){
+    surprisePool = MENSAGENS_SURPRESA.slice();
+    for(let i = surprisePool.length - 1; i > 0; i--){
+      const j = Math.floor(Math.random() * (i + 1));
+      const tmp = surprisePool[i]; surprisePool[i] = surprisePool[j]; surprisePool[j] = tmp;
+    }
+    if(surprisePool.length > 1 && surprisePool[surprisePool.length - 1] === lastSurprise){
+      const last = surprisePool.length - 1;
+      const tmp = surprisePool[0]; surprisePool[0] = surprisePool[last]; surprisePool[last] = tmp;
+    }
+  }
+  const msg = surprisePool.pop();
+  lastSurprise = msg;
+  const el = $("surpriseMsg");
+  el.textContent = msg;
+  el.classList.remove("pop"); void el.offsetWidth; el.classList.add("pop");
+  rainHearts(7);
+}
+
+// ═══════════════════════════════════════════
+//  MÚSICA DE FUNDO 🎵
+// ═══════════════════════════════════════════
+let audioCtx = null, masterGain = null, musicStarted = false, musicMuted = false;
+let musicTimer = null, nextNoteTime = 0, musicStep = 0, musicChord = 0, audioEl = null;
+
+// Acordes da melodinha (Dó maior → Sol → Lá menor → Fá)
+const MUSIC_CHORDS = [
+  { bass: 130.81, notes: [261.63, 329.63, 392.00, 523.25, 659.25, 523.25, 392.00, 329.63] },
+  { bass: 196.00, notes: [293.66, 392.00, 493.88, 587.33, 493.88, 587.33, 493.88, 392.00] },
+  { bass: 220.00, notes: [329.63, 440.00, 523.25, 659.25, 440.00, 659.25, 523.25, 440.00] },
+  { bass: 174.61, notes: [349.23, 440.00, 523.25, 698.46, 440.00, 523.25, 440.00, 349.23] }
+];
+
+function startMusic(){
+  if(musicStarted) return;
+  musicStarted = true;
+  $("musicBtn").classList.add("show");
+  if(CONFIG.musica){
+    audioEl = new Audio(CONFIG.musica);
+    audioEl.loop = true;
+    audioEl.volume = 0.55;
+    audioEl.play().catch(() => startGenerated());
+  } else {
+    startGenerated();
+  }
+}
+
+function startGenerated(){
+  try{
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    masterGain = audioCtx.createGain();
+    masterGain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+    masterGain.gain.linearRampToValueAtTime(0.4, audioCtx.currentTime + 3);
+    const lp = audioCtx.createBiquadFilter();
+    lp.type = "lowpass"; lp.frequency.value = 2200;
+    const delay = audioCtx.createDelay(1);
+    delay.delayTime.value = 0.34;
+    const fb = audioCtx.createGain(); fb.gain.value = 0.27;
+    const wet = audioCtx.createGain(); wet.gain.value = 0.2;
+    masterGain.connect(lp); lp.connect(audioCtx.destination);
+    lp.connect(delay); delay.connect(fb); fb.connect(delay);
+    delay.connect(wet); wet.connect(audioCtx.destination);
+    nextNoteTime = audioCtx.currentTime + 0.15;
+    musicTimer = setInterval(scheduleMusic, 150);
+    if(audioCtx.state === "suspended") audioCtx.resume();
+  }catch(e){ /* sem áudio disponível */ }
+}
+
+function scheduleMusic(){
+  if(!audioCtx) return;
+  while(nextNoteTime < audioCtx.currentTime + 0.5){
+    const chord = MUSIC_CHORDS[musicChord];
+    playTone(chord.notes[musicStep % 8], nextNoteTime, 0.27, 0.1, "triangle");
+    if(musicStep % 8 === 0) playTone(chord.bass, nextNoteTime, 2.1, 0.3, "sine");
+    nextNoteTime += 0.28;
+    musicStep++;
+    if(musicStep % 8 === 0) musicChord = (musicChord + 1) % MUSIC_CHORDS.length;
+  }
+}
+
+function playTone(freq, time, dur, vol, type){
+  const o = audioCtx.createOscillator();
+  const g = audioCtx.createGain();
+  o.type = type; o.frequency.value = freq;
+  g.gain.setValueAtTime(0.0001, time);
+  g.gain.linearRampToValueAtTime(vol, time + 0.04);
+  g.gain.exponentialRampToValueAtTime(0.0001, time + dur + 0.6);
+  o.connect(g); g.connect(masterGain);
+  o.start(time); o.stop(time + dur + 0.7);
+}
+
+function toggleMusic(){
+  musicMuted = !musicMuted;
+  if(audioEl) audioEl.muted = musicMuted;
+  if(masterGain && audioCtx){
+    const t = audioCtx.currentTime;
+    masterGain.gain.cancelScheduledValues(t);
+    masterGain.gain.setValueAtTime(masterGain.gain.value, t);
+    masterGain.gain.linearRampToValueAtTime(musicMuted ? 0.0001 : 0.4, t + 0.6);
+  }
+  $("musicBtn").textContent = musicMuted ? "🔇" : "🎵";
+}
+
+// ═══════════════════════════════════════════
+//  INICIALIZAÇÃO
+// ═══════════════════════════════════════════
+createFloatingHearts();
+buildBoxes();
+buildMotives();
+buildTimeline();
+setupObservers();
+tick();
+setInterval(tick, 1000);
+
+$("hintMsg").textContent = "Dica: são " + CONFIG.senha.length + " letrinhas e começa com “" + CONFIG.senha[0].toUpperCase() + "” 😉";
+$("btnOpen").addEventListener("click", openSite);
+$("btnSurprise").addEventListener("click", surprise);
+$("letterCard").addEventListener("click", skipTyping);
+$("musicBtn").addEventListener("click", toggleMusic);
+</script>
+</body>
+</html>
